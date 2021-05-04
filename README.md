@@ -27,6 +27,15 @@ Download [download_enabler.suprx](https://github.com/TheOfficialFloW/VitaTweaks/
 ux0:tai/download_enabler.suprx
 ```
 
+### Changelog 
+- Move files automatically to defined folders depending on their file extension 
+  - e.g. `*.iso` to `ux:/pspemu/iso` or `*.mp4` to `ux:/video`
+- A configuration file `ux:/data/download.cfg` can be used to define the target partition and folders for each supported file type 
+   - `ISO=ux:/pspemu/iso`for `iso` and `cso` files
+   - `VIDEO=ux:/video` for `mp4` and `m4v` files 
+   - `PHOTO=ux:/photo`for `jpg` and `png` files  
+
+
 ## 3. NoTrophyMsg
 
 This tweak disables the trophy hint message when you launch application whose savedatas are linked to a different account. Useful if you constantly switch accounts.

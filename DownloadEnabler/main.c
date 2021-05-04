@@ -38,6 +38,11 @@ static int ExportFilePatched(uint32_t *data) {
     char short_name[256];
     uint16_t url_length = 0;
     uint32_t count = 0;
+    //TODO: read the following values from ux0:/data/download.cfg
+    char *download_folder = "ux0:download"; //default
+    char *pspiso_folder = "ux0:pspemu/iso";
+		char *video_folder = "ux0:video";
+		char *photo_folder = "ux0:photo";
 
     uint32_t num = *(uint32_t *)data[0];
 
@@ -65,12 +70,25 @@ static int ExportFilePatched(uint32_t *data) {
       ext = "";
     }
 
-    while (1) {
-      if (count == 0)
-        sceClibSnprintf(download_path, sizeof(download_path), "ux0:download/%s", file_name);
-      else
-        sceClibSnprintf(download_path, sizeof(download_path), "ux0:download/%s (%d)%s", short_name, count, ext);
+    // with an ISO extension, move it to the ISO folder
+		if (strcmp(ext, "iso") == 0) {
+  		download_folder = pspiso_folder;
+		}
+    // with an mp4 extension, move it to the video folder
+		if (strcmp(ext, "mp4") == 0) {
+  		download_folder = video_folder;
+		}
+    // with an jpg extension, move it to the photo folder
+		if (strcmp(ext, "jpg") == 0) {
+  		download_folder = photo_folder;
+		}
 
+    while (1) {
+      if (count == 0) {
+        sceClibSnprintf(download_path, sizeof(download_path), "%s/%s", download_folder, file_name);
+      } else {
+        sceClibSnprintf(download_path, sizeof(download_path), "%s/%s (%d)%s", download_folder, short_name, count, ext);
+      }
       SceIoStat stat;
       sceClibMemset(&stat, 0, sizeof(SceIoStat));
       if (sceIoGetstat(download_path, &stat) < 0)
@@ -79,7 +97,7 @@ static int ExportFilePatched(uint32_t *data) {
       count++;
     }
 
-    res = sceIoMkdir("ux0:download", 0006);
+    res = sceIoMkdir(download_folder, 0006);
     if (res < 0 && res != 0x80010011)
       return res;
 
