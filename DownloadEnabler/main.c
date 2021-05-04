@@ -23,10 +23,16 @@
 
 #include <taihen.h>
 
+
 static tai_hook_ref_t ExportFileRef;
 static tai_hook_ref_t GetFileTypeRef;
 
 static SceUID hooks[3];
+
+int strcmp(const char *a,const char *b){
+  if (! (*a | *b)) return 0;
+  return (*a!=*b) ? *a-*b : strcmp(++a,++b);
+}
 
 static int ExportFilePatched(uint32_t *data) {
   int res = TAI_CONTINUE(int, ExportFileRef, data);
