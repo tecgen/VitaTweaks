@@ -78,15 +78,15 @@ static int ExportFilePatched(uint32_t *data) {
 
     // with an ISO extension, move it to the ISO folder
     if ( (strcmp(ext, "iso") == 0) || (strcmp(ext, "cso") == 0) ) {
-      download_folder = pspiso_folder;
+      sceClibSnprintf(download_folder, sizeof(download_folder), "%s", pspiso_folder);
     }
     // with an mp4 extension, move it to the video folder
     if ( (strcmp(ext, "mp4") == 0) || (strcmp(ext, "m4v") == 0) ) {
-       download_folder = video_folder;
+      sceClibSnprintf(download_folder, sizeof(download_folder), "%s", video_folder);
     }
     // with an jpg extension, move it to the photo folder
     if ( (strcmp(ext, "jpg") == 0) || (strcmp(ext, "png") == 0) ) {
-      download_folder = photo_folder;
+      sceClibSnprintf(download_folder, sizeof(download_folder), "%s", photo_folder);
     }
 
     while (1) {
