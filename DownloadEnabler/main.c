@@ -47,8 +47,8 @@ static int ExportFilePatched(uint32_t *data) {
     //TODO: read the following values from ux0:/data/download.cfg
     char *download_folder = "ux0:download"; //default
     char *pspiso_folder = "ux0:pspemu/iso";
-		char *video_folder = "ux0:video";
-		char *photo_folder = "ux0:photo";
+    char *video_folder = "ux0:video";
+    char *photo_folder = "ux0:photo";
 
     uint32_t num = *(uint32_t *)data[0];
 
