@@ -44,15 +44,21 @@ static int ExportFilePatched(uint32_t *data) {
     char short_name[256];
     uint16_t url_length = 0;
     uint32_t count = 0;
-    //TODO: read the following values from ux0:/data/download.cfg
-    char *download_folder = "ux0:download"; //default
-    char *pspiso_folder = "ux0:pspemu/iso";
-    char *video_folder = "ux0:video";
-    char *photo_folder = "ux0:photo";
+    
+    char download_folder[256];
+    char pspiso_folder[256];
+    char video_folder[256];
+    char photo_folder[256];
 
     uint32_t num = *(uint32_t *)data[0];
 
     sceClibSnprintf(bgdl_path, sizeof(bgdl_path), "ux0:bgdl/t/%08x/d0.pdb", num);
+    
+    //TODO: read the following values from ux0:/data/download.cfg
+    sceClibSnprintf(download_folder, sizeof(download_folder), "%s", "ux0:download");
+    sceClibSnprintf(pspiso_folder, sizeof(pspiso_folder), "%s", "ux0:pspemu/iso");
+    sceClibSnprintf(video_folder, sizeof(video_folder), "%s", "ux0:video");
+    sceClibSnprintf(photo_folder, sizeof(photo_folder), "%s", "ux0:photo");
 
     SceUID fd = sceIoOpen(bgdl_path, SCE_O_RDONLY, 0);
     if (fd < 0)
