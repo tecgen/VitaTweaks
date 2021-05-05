@@ -30,7 +30,7 @@ ux0:tai/download_enabler.suprx
 ### Changelog 
 - Move files automatically to defined folders depending on their file extension 
   - e.g. `*.iso` to `ux0:pspemu/iso` or `*.mp4` to `ux0:video`
-- A configuration file `ux:/data/download.cfg` can be used to define the target partition and folders for each supported file type 
+- A configuration file `ux0:/data/download.cfg` can be used to define the target partition and folders for each supported file type 
    - `ISO=ux0:pspemu/iso`for `iso` and `cso` files
    - `VIDEO=ux0:video` for `mp4` and `m4v` files 
    - `PHOTO=ux0:photo`for `jpg` and `png` files  
